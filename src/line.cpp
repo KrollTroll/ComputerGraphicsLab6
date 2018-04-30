@@ -24,7 +24,8 @@ using namespace std;
 	 * @param x2 : end point x coordinate
 	 * @param y2 : end point y coordinate
 	 */
-	line::line(float x, float y, int R, int G, int B, float x2, float y2):shape(x,y,R,G,B){
+	line::line(float x, float y, int R, int G, int B, float x2, float y2)
+															:shape(x,y,R,G,B){
 		this->x2 = x2;
 		this->y2 = y2;
 		this->coor[0][1] = x2;
@@ -35,33 +36,38 @@ using namespace std;
 		}
 	}
 
-	line::line(float x, float y, int R, int G, int B, float x2, float y2, viewcontext* vc):shape(x,y,R,G,B){
+	/**
+	 * line consructor that utilizes a viewcontext object for conversion
+	 * @param x  : start point x coordinate
+	 * @param y  : start point y coordinate
+	 * @param R  : line red color value
+	 * @param G  : line green color value
+	 * @param B  : line blue color value
+	 * @param x2 : end point x coordinate
+	 * @param y2 : end point y coordinate
+	 * @param vc : viewcontext object for image/display conversion
+	 */
+	line::line(float x, float y, int R, int G, int B, float x2, float y2, viewcontext* vc)
+																			:shape(x,y,R,G,B){
 			//create display matrix
+			//assign values not assigned thorugh inheritance
 			this->x2 = x2;
 			this->y2 = y2;
-			//coor[0][0] = x;
-			//coor[1][0] = y;
 			coor[0][1] = this->x2;
 			coor[1][1] = this->y2;
-			//std::cout << "INIT COOR : " << x << "," << y << " | " << x2 << "," << y2 << std::endl;
+			//assign unneded values in matrices so multiplication works
 			for(int i = 0; i < 4; i++){
 					coor[2][i] = 0;
 					coor[3][i] = 1;
 			}
-
 			//convert display matrix to image matrix
 			matrix newCoor = vc->convertToImage(coor);
 			coor = newCoor;
+			//reassign values as necessary
 			shape::x = coor[0][0];
 			shape::y = coor[1][0];
-			//std::cout << "CONV COOR1 : " << x << "," << y << " | " << x2 << "," << y2 << std::endl;
-			//std::cout << "MAT COOR1 : " << coor[0][0] << "," << coor[1][0] << " | " << coor[0][1] << "," << coor[1][1] << std::endl;
 			this->x2 = coor[0][1];
 			this->y2 = coor[1][1];
-			//std::cout << "CONV COOR2 : " << x << "," << y << " | " << x2 << "," << y2 << std::endl;
-			//std::cout << "MAT COOR2 : " << coor[0][0] << "," << coor[1][0] << " | " << coor[0][1] << "," << coor[1][1] << std::endl;
-			//std::cout << "COOR GOING INTO IMAGE" << std::endl;
-			//std::cout << coor << std::endl;
 	}
 
 	/**
@@ -88,18 +94,17 @@ using namespace std;
 		GC->drawLine(coor[0][0], coor[1][0], coor[0][1], coor[1][1]);
 	}
 
+	/**
+	 * draws a line to the target grapics context inteface using a viewcontext for conversion
+	 * @param GC : target garphics context
+	 * @param vc : viewcontext object for image/display conversion
+	 */
 	void line::draw(GraphicsContext* GC, viewcontext* vc){
-
-			//std::cout << "COOR OUT OF FILE" << std::endl;
-			//std::cout << coor << std::endl;
+			//convert points to window format
 			matrix drawCoor = vc->convertToWindow(coor);
-			//std::cout << "DRAW COOR" << std::endl;
-			//std::cout << drawCoor << std::endl;
-
 			int color = (((this->RED << 8) + this->GREEN) << 8) + this->BLUE;
 			GC->setColor(color);
 			GC->drawLine(drawCoor[0][0], drawCoor[1][0], drawCoor[0][1], drawCoor[1][1]);
-			//GC->drawLine(coor[0][0], coor[1][0], coor[0][1], coor[1][1]);
 	}
 
 	/**

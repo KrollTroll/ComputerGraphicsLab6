@@ -141,6 +141,8 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				gc->clear();
 				vc->undo();
 				picture.draw(gc, vc);
+				gc->setColor(GraphicsContext::GREEN);
+				decodeColor(GraphicsContext::GREEN);
 			}
 			//reset pressed
 			else if(keycode == 114){

@@ -25,7 +25,19 @@ public:
 	 */
 	line(float x, float y, int R, int G, int B, float x2, float y2);
 
-	line(float x, float y, int R, int G, int B, float x2, float y2, viewcontext* vc);
+	/**
+	 * line consructor that utilizes a viewcontext object for conversion
+	 * @param x  : start point x coordinate
+	 * @param y  : start point y coordinate
+	 * @param R  : line red color value
+	 * @param G  : line green color value
+	 * @param B  : line blue color value
+	 * @param x2 : end point x coordinate
+	 * @param y2 : end point y coordinate
+	 * @param vc : viewcontext object for image/display conversion
+	 */
+	line(float x, float y, int R, int G, int B, float x2, float y2,
+														viewcontext* vc);
 
 	/**
 	 * copy constructor for a line
@@ -44,6 +56,11 @@ public:
 	 */
 	void draw(GraphicsContext* GC);
 
+	/**
+	 * draws a line to the target grapics context inteface using a viewcontext for conversion
+	 * @param GC : target garphics context
+	 * @param vc : viewcontext object for image/display conversion
+	 */
 	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**
@@ -73,7 +90,6 @@ public:
 	void in(std::istream& in);
 
 private:
-	//matrix coor2;
 	float x2;
 	float y2;
 };
