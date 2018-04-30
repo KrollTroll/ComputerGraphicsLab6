@@ -16,6 +16,8 @@ public:
  */
 drawing();
 
+~drawing();
+
 /**
  * repaint the image upon an exposure event
  * @param gc : graphics context to repaint
@@ -92,5 +94,7 @@ image picture;
 unsigned int RED;
 unsigned int GREEN;
 unsigned int BLUE;
+
+viewcontext* vc;
 };
 #endif

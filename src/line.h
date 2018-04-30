@@ -25,6 +25,8 @@ public:
 	 */
 	line(float x, float y, int R, int G, int B, float x2, float y2);
 
+	line(float x, float y, int R, int G, int B, float x2, float y2, viewcontext* vc);
+
 	/**
 	 * copy constructor for a line
 	 * @param from : line to copy from
@@ -41,6 +43,8 @@ public:
 	 * @param GC : target garphics context
 	 */
 	void draw(GraphicsContext* GC);
+
+	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**
 	 * assignment operator
@@ -69,7 +73,7 @@ public:
 	void in(std::istream& in);
 
 private:
-	matrix coor2;
+	//matrix coor2;
 	float x2;
 	float y2;
 };

@@ -95,6 +95,13 @@ void image::draw(GraphicsContext* gc){
 	}
 }
 
+void image::draw(GraphicsContext* gc, viewcontext* vc){
+	//draw each member of the vector
+	for(int i = 0; i < (int)shapes.size(); i++){
+		shapes[i]->draw(gc, vc);
+	}
+}
+
 /**
  * print out the image to a target output
  * @param os : the target output stream

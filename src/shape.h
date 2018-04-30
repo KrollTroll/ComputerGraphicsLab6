@@ -10,6 +10,7 @@
 
 #include "gcontext.h"
 #include "matrix.h"
+#include "viewcontext.h"
 
 #include <iostream>
 
@@ -47,6 +48,8 @@ public:
 	 * draw the shape
 	 */
 	virtual void draw(GraphicsContext* GC) = 0;
+
+	virtual void draw(GraphicsContext* GC, viewcontext* vc) = 0;
 
 	/**
 	 * print the shape out to a terminal

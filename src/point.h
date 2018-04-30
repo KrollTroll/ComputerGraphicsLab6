@@ -23,6 +23,8 @@ public:
 	 */
 	point(float x, float y, int R, int G, int B);
 
+	point(float x, float y, int R, int G, int B, viewcontext* vc);
+
 	/**
 	 * copy constructor for point
 	 * @param from : object to copy
@@ -39,6 +41,8 @@ public:
 	 * @param GC : graphicscontext interface to draw to
 	 */
 	void draw(GraphicsContext* GC);
+
+	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**
 	 * assignment operator

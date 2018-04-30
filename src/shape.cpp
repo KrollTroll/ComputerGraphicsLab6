@@ -17,21 +17,29 @@
  * @param G   : GREEN data
  * @param B   : BLUE data
  */
-shape::shape(float x, float y, int R, int G, int B):x(x), y(y), coor(3,1), RED(R),GREEN(G),BLUE(B){
+shape::shape(float x, float y, int R, int G, int B):x(x), y(y), coor(4,4), RED(R),GREEN(G),BLUE(B){
 	coor[0][0] = x;
 	coor[1][0] = y;
-	coor[2][0] = 1;
+
+	for(int i = 0; i < 4; i++){
+		coor[2][i] = 1;
+		coor[3][i] = 1;
+	}
 }
 
 /**
  * Copy constructor
  * @param from : shape to copy information over from
  */
-shape::shape(const shape& from):x(from.x),y(from.y), coor(3,1),
+shape::shape(const shape& from):x(from.x),y(from.y), coor(3,3),
 		RED(from.RED),GREEN(from.GREEN),BLUE(from.BLUE){
 	coor[0][0] = x;
 	coor[1][0] = y;
-	coor[2][0] = 1;
+
+	for(int i = 0; i < 4; i++){
+			coor[2][i] = 1;
+			coor[3][i] = 1;
+	}
 }
 
 /**
@@ -61,8 +69,8 @@ shape& shape::operator=(const shape& rhs){
  * @return   : the same os stream
  */
 std::ostream& shape::out(std::ostream& os) const{
-	os << "  " << x << "\n";
-	os << "  " << y << "\n";
+	os << "  " << coor[0][0] << "\n";
+	os << "  " << coor[1][0] << "\n";
 	os << "  " << RED << "\n";
 	os << "  " << GREEN << "\n";
 	os << "  " << BLUE << "\n";

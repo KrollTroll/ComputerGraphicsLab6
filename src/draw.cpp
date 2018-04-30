@@ -4,9 +4,7 @@
 #include "drawing.h"
 int main(void)
 {
-GraphicsContext
-*
-gc = new X11Context(800,600,GraphicsContext::BLACK);
+GraphicsContext*gc = new X11Context(800,600,GraphicsContext::BLACK);
 gc->setColor(GraphicsContext::GREEN);
 // make a drawing
 drawing md;

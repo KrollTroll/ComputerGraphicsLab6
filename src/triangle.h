@@ -26,6 +26,8 @@ public:
 	 */
 	triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3);
 
+	triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3, viewcontext* vc);
+
 	/**
 	 * copy constructor
 	 * @param from : triangle to copy data from
@@ -42,6 +44,8 @@ public:
 	 * @param GC : target interface
 	 */
 	void draw(GraphicsContext* GC);
+
+	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**
 	 * assignment operator - assigns one triangle the data of another
@@ -70,8 +74,6 @@ public:
 	void in(std::istream& in);
 
 protected:
-	matrix coor2;
-	matrix coor3;
 	float x2;
 	float y2;
 	float x3;

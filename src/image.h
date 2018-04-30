@@ -49,6 +49,8 @@ public:
 	 */
 	void draw(GraphicsContext* gc);
 
+	void draw(GraphicsContext* gc, viewcontext* vc);
+
 	/**
 	 * print output to output stream
 	 * @param os : target stream

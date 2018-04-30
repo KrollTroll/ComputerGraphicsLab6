@@ -24,7 +24,12 @@ drawing::drawing()
 	RED = GREEN = BLUE = 0;
 	//decode default color value
 	decodeColor(GraphicsContext::GREEN);
+	vc = new viewcontext();
 	return;
+}
+
+drawing::~drawing(){
+	delete vc;
 }
 
 /**
@@ -35,7 +40,7 @@ void drawing::paint(GraphicsContext*gc)
 {
 	//erase windows and redraw
 	gc->clear();
-	picture.draw(gc);
+	picture.draw(gc, vc);
 	return;
 }
 
@@ -126,7 +131,7 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 			}
 			input.close();
 			gc->clear();
-			picture.draw(gc);
+			picture.draw(gc, vc);
 		}
 	}
 }
@@ -206,7 +211,7 @@ void drawing::mouseButtonDown(GraphicsContext* gc, unsigned int button, int x, i
 			//reset dragging
 			dragging = false;
 			//ad triangle to image
-			triangle t1(xOrg, yOrg, RED, GREEN, BLUE, xVert2, yVert2, xVert3, yVert3);
+			triangle t1(xOrg, yOrg, RED, GREEN, BLUE, xVert2, yVert2, xVert3, yVert3, vc);
 			picture.add(&t1);
 		}
 	}
@@ -214,7 +219,8 @@ void drawing::mouseButtonDown(GraphicsContext* gc, unsigned int button, int x, i
 	else{
 		gc->setPixel(x, y);
 		//add pixel to image
-		point p1(x, y, RED, GREEN, BLUE);
+		point p1(x, y, RED, GREEN, BLUE, vc);
+		//std::cout << x << ", " << y << std::endl;
 		picture.add(&p1);
 	}
 	return;
@@ -246,7 +252,8 @@ void drawing::mouseButtonUp(GraphicsContext* gc, unsigned int button, int x, int
 			// clear flag
 			dragging = false;
 			// add line to image
-			line l1(x0, y0, RED, GREEN, BLUE, x1, y1);
+			line l1(x0, y0, RED, GREEN, BLUE, x1, y1, vc);
+			//std::cout << l1 << std::endl;
 			picture.add(&l1);
 		}
 	}

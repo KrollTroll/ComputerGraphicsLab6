@@ -1,38 +1,12 @@
 PICTURE OUTPUT
-START TRIANGLE
-  309
-  235
+START LINE
+  -385
+  285
   0
   255
   0
-  569
-  218
-  453
-  399
-END
-
-START TRIANGLE
-  639
-  444
-  0
-  255
-  0
-  722
-  257
-  420
-  136
-END
-
-START TRIANGLE
-  331
-  142
-  0
-  255
-  0
-  119
-  258
-  310
-  407
+  375
+  -283
 END
 
 
