@@ -96,5 +96,12 @@ unsigned int GREEN;
 unsigned int BLUE;
 
 viewcontext* vc;
+
+bool transforming;
+char tState;
+
+bool nowDrawing;
+
+bool nowModifying;
 };
 #endif

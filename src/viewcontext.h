@@ -9,15 +9,16 @@ public:
 viewcontext();
 ~viewcontext();
 
-matrix convertToImage(const matrix oldMat);
-matrix convertToWindow(const matrix oldMat);
-
 void changeX(char sign);
 void changeY(char sign);
 
 void changeDeg(char sign);
 
 void scale(char sign);
+
+matrix convertToImage(const matrix oldMat);
+
+matrix convertToWindow(const matrix oldMat);
 
 void undo();
 
@@ -28,10 +29,8 @@ matrix transFWD;
 matrix transBWD;
 //homogenous matrix
 matrix homo;
+//inverse homogenous matrix
+matrix invHomo;
 
-int deg;
-int ylate;
-int xlate;
-int scaleFact;
 };
 #endif

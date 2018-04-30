@@ -68,11 +68,14 @@ void point::draw(GraphicsContext* GC){
 
 void point::draw(GraphicsContext* GC, viewcontext* vc){
 
-	matrix drawCoor = vc->convertToWindow(coor);
+	//matrix drawCoor = vc->convertToWindow(coor);
 	//std::cout << "COOR OUT OF IMAGE" << std::endl;
 	//std::cout << coor << std::endl;
 	//std::cout << "DRAW COOR" << std::endl;
 	//std::cout << drawCoor << std::endl;
+	//cout << "COOR" << endl << coor << endl;
+	matrix drawCoor = vc->convertToWindow(coor);
+	//cout << "DRAW" << endl << drawCoor << endl;
 	int color = (((this->RED << 8) + this->GREEN) << 8) + this->BLUE;
 	GC->setColor(color);
 	GC->setPixel(drawCoor[0][0], drawCoor[1][0]);

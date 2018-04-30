@@ -22,7 +22,7 @@ shape::shape(float x, float y, int R, int G, int B):x(x), y(y), coor(4,4), RED(R
 	coor[1][0] = y;
 
 	for(int i = 0; i < 4; i++){
-		coor[2][i] = 1;
+		coor[2][i] = 0;
 		coor[3][i] = 1;
 	}
 }

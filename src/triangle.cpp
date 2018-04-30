@@ -36,7 +36,7 @@ triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, fl
 	coor[0][2] = x3;
 	coor[1][2] = y3;
 	for(int i = 0; i < 4; i++){
-		coor[2][i] = 1;
+		coor[2][i] = 0;
 		coor[3][i] = 1;
 	}
 }
@@ -48,10 +48,12 @@ triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, fl
 	this->y2 = y2;
 	this->x3 = x3;
 	this->y3 = y3;
-	coor[0][1] = x2;
-	coor[1][1] = y2;
-	coor[0][2] = x3;
-	coor[1][2] = y3;
+	coor[0][1] = this->x2;
+	coor[1][1] = this->y2;
+	coor[0][2] = this->x3;
+	coor[1][2] = this->y3;
+	//cout << "READ IN TRI" << endl;
+	//cout << coor << endl;
 	for(int i = 0; i < 4; i++){
 		coor[2][i] = 1;
 		coor[3][i] = 1;
@@ -61,12 +63,17 @@ triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, fl
 	//convert display matrix to image matrix
 	matrix newCoor = vc->convertToImage(coor);
 	coor = newCoor;
-	x = coor[0][0];
-	y = coor[0][1];
-	x2 = coor[1][0];
-	y2 = coor[1][1];
-	x3 = coor[0][2];
-	y3 = coor[1][2];
+
+	//cout << "CONV TRI" << endl;
+	//std::cout << newCoor << std::endl;
+
+
+	shape::x = coor[0][0];
+	shape::y = coor[1][0];
+	this->x2 = coor[0][1];
+	this->y2 = coor[1][1];
+	this->x3 = coor[0][2];
+	this->y3 = coor[1][2];
 }
 
 /**
@@ -98,15 +105,28 @@ void triangle::draw(GraphicsContext* GC){
 	GC->setColor(color);
 	GC->drawLine(coor[0][0],  coor[1][0],  coor[0][1], coor[1][1]);
 	GC->drawLine(coor[0][1],  coor[1][1],  coor[0][2], coor[1][2]);
-	GC->drawLine(coor[0][2],  coor[1][2],  coor[0][0], coor[0][1]);
+	GC->drawLine(coor[0][2],  coor[1][2],  coor[0][0], coor[1][0]);
 }
 
 void triangle::draw(GraphicsContext* GC, viewcontext* vc){
+
+	//std::cout << coor << std::endl;
+
+	matrix drawCoor = vc->convertToWindow(coor);
+
+	//cout << "file to screen" << endl;
+	//std::cout << drawCoor << std::endl;
+
+
 	int color = (((this->RED << 8) + this->GREEN) << 8) + this->BLUE;
 	GC->setColor(color);
-	GC->drawLine(coor[0][0],  coor[1][0],  coor[0][1], coor[1][1]);
-	GC->drawLine(coor[0][1],  coor[1][1],  coor[0][2], coor[1][2]);
-	GC->drawLine(coor[0][2],  coor[1][2],  coor[0][0], coor[0][1]);
+
+	//cout << drawCoor[0][0] << " " << drawCoor[1][0] << " to " << drawCoor[0][1] << " " << drawCoor[1][1] << endl;
+	GC->drawLine(drawCoor[0][0],  drawCoor[1][0],  drawCoor[0][1], drawCoor[1][1]);
+	//cout << drawCoor[0][1] << " " << drawCoor[1][1] << " to " << drawCoor[0][2] << " " << drawCoor[1][2] << endl;
+	GC->drawLine(drawCoor[0][1],  drawCoor[1][1],  drawCoor[0][2], drawCoor[1][2]);
+	//cout << drawCoor[0][2] << " " << drawCoor[1][2] << " to " << drawCoor[0][0] << " " << drawCoor[1][0] << endl;
+	GC->drawLine(drawCoor[0][2],  drawCoor[1][2],  drawCoor[0][0], drawCoor[1][0]);
 }
 
 /**
@@ -137,6 +157,9 @@ triangle& triangle::clone(){
  * @return   : address of that same stream
  */
 std::ostream& triangle::out(std::ostream& os) const{
+
+	//std::cout << coor << std::endl;
+
 	os << "START TRIANGLE" << "\n";
 	shape::out(os);
 	os << "  " << coor[0][1] << "\n";

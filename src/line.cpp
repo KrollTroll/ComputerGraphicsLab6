@@ -30,7 +30,7 @@ using namespace std;
 		this->coor[0][1] = x2;
 		this->coor[1][1] = y2;
 		for(int i = 0; i < 4; i++){
-			coor[2][i] = 1;
+			coor[2][i] = 0;
 			coor[3][i] = 1;
 		}
 	}
@@ -45,15 +45,15 @@ using namespace std;
 			coor[1][1] = this->y2;
 			//std::cout << "INIT COOR : " << x << "," << y << " | " << x2 << "," << y2 << std::endl;
 			for(int i = 0; i < 4; i++){
-					coor[2][i] = 1;
+					coor[2][i] = 0;
 					coor[3][i] = 1;
 			}
 
 			//convert display matrix to image matrix
 			matrix newCoor = vc->convertToImage(coor);
 			coor = newCoor;
-			shape::x = x = coor[0][0];
-			shape::y = y = coor[1][0];
+			shape::x = coor[0][0];
+			shape::y = coor[1][0];
 			//std::cout << "CONV COOR1 : " << x << "," << y << " | " << x2 << "," << y2 << std::endl;
 			//std::cout << "MAT COOR1 : " << coor[0][0] << "," << coor[1][0] << " | " << coor[0][1] << "," << coor[1][1] << std::endl;
 			this->x2 = coor[0][1];
