@@ -23,6 +23,16 @@ public:
 	 */
 	point(float x, float y, int R, int G, int B);
 
+	/**
+	 * constructor for point object utilizing a viewcontext
+	 * 	allows easy conversion of model/image using VD
+	 * @param x  : x coordinate of point
+	 * @param y  : y coordinate of point
+	 * @param R  : red color value for point
+	 * @param G  : green color value for point
+	 * @param B  : blue color value for point
+	 * @param vc : viewcontext for model/display conversion
+	 */
 	point(float x, float y, int R, int G, int B, viewcontext* vc);
 
 	/**
@@ -42,6 +52,11 @@ public:
 	 */
 	void draw(GraphicsContext* GC);
 
+	/**
+	 * draws a point utilizing a viewcontext object for conversion
+	 * @param GC : graphicscontext interface to draw to
+	 * @param vc : viewcontext for image/display converison
+	 */
 	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**

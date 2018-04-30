@@ -24,6 +24,16 @@ using namespace std;
  */
 point::point(float x, float y, int R, int G, int B):shape(x,y,R,G,B){}
 
+/**
+ * constructor for point object utilizing a viewcontext
+ * 	allows easy conversion of model/image using VD
+ * @param x  : x coordinate of point
+ * @param y  : y coordinate of point
+ * @param R  : red color value for point
+ * @param G  : green color value for point
+ * @param B  : blue color value for point
+ * @param vc : viewcontext for model/display conversion
+ */
 point::point(float x, float y, int R, int G, int B, viewcontext* vc):shape(x,y,R,G,B){
 
 	//create display matrix
@@ -37,12 +47,9 @@ point::point(float x, float y, int R, int G, int B, viewcontext* vc):shape(x,y,R
 	//convert display matrix to reflect image
 	matrix newCoor = vc->convertToImage(coor);
 	coor = newCoor;
-	//std::cout << "COOR IN IMAGE" << std::endl;
-	//std::cout << coor << std::endl;
-	//std::cout << newCoor << std::endl;
+	//reassign necessary inherited values
 	shape::x = x = coor[0][0];
 	shape::y = y = coor[1][0];
-	//std::cout << "x:" << x << " y:" << y << std::endl;
 }
 
 /**
@@ -66,20 +73,17 @@ void point::draw(GraphicsContext* GC){
 	GC->setPixel(this->x, this->y);
 }
 
+/**
+ * draws a point utilizing a viewcontext object for conversion
+ * @param GC : graphicscontext interface to draw to
+ * @param vc : viewcontext for image/display converison
+ */
 void point::draw(GraphicsContext* GC, viewcontext* vc){
-
-	//matrix drawCoor = vc->convertToWindow(coor);
-	//std::cout << "COOR OUT OF IMAGE" << std::endl;
-	//std::cout << coor << std::endl;
-	//std::cout << "DRAW COOR" << std::endl;
-	//std::cout << drawCoor << std::endl;
-	//cout << "COOR" << endl << coor << endl;
+	//convert coordinates to window mode for drawing
 	matrix drawCoor = vc->convertToWindow(coor);
-	//cout << "DRAW" << endl << drawCoor << endl;
 	int color = (((this->RED << 8) + this->GREEN) << 8) + this->BLUE;
 	GC->setColor(color);
 	GC->setPixel(drawCoor[0][0], drawCoor[1][0]);
-	//GC->setPixel(coor[0][0], coor[1][0]);
 }
 
 /**
