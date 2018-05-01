@@ -26,7 +26,8 @@ using namespace std;
  * @param x3 : third point x coordinate
  * @param y3 : third point y coordinate
  */
-triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3):shape(x,y,R,G,B){
+triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3)
+																				:shape(x,y,R,G,B){
 	this->x2 = x2;
 	this->y2 = y2;
 	this->x3 = x3;
@@ -41,8 +42,21 @@ triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, fl
 	}
 }
 
+/**
+ * basic triangle constructor with added viewcontext for conversions
+ * @param x  : origin x coordinate
+ * @param y  : origin y coordinate
+ * @param R  : RED value
+ * @param G  : GREEN value
+ * @param B  : BLUE value
+ * @param x2 : second point x coordinate
+ * @param y2 : second point y coordinate
+ * @param x3 : third point x coordinate
+ * @param y3 : third point y coordinate
+ * @param vc : viewcontext for image/display conversions
+ */
 triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3, viewcontext* vc)
-									:shape(x,y,R,G,B){
+																								:shape(x,y,R,G,B){
 	//create display matrix
 	this->x2 = x2;
 	this->y2 = y2;
@@ -52,22 +66,15 @@ triangle::triangle(float x, float y, int R, int G, int B, float x2, float y2, fl
 	coor[1][1] = this->y2;
 	coor[0][2] = this->x3;
 	coor[1][2] = this->y3;
-	//cout << "READ IN TRI" << endl;
-	//cout << coor << endl;
 	for(int i = 0; i < 4; i++){
 		coor[2][i] = 1;
 		coor[3][i] = 1;
 	}
 
-	//convert display matrix to model
 	//convert display matrix to image matrix
 	matrix newCoor = vc->convertToImage(coor);
 	coor = newCoor;
-
-	//cout << "CONV TRI" << endl;
-	//std::cout << newCoor << std::endl;
-
-
+	//reassign values
 	shape::x = coor[0][0];
 	shape::y = coor[1][0];
 	this->x2 = coor[0][1];
@@ -108,24 +115,18 @@ void triangle::draw(GraphicsContext* GC){
 	GC->drawLine(coor[0][2],  coor[1][2],  coor[0][0], coor[1][0]);
 }
 
+/**
+ * draw method with added viewcontext for conversion
+ * @param GC : graphicscontext interface to draw to
+ * @param vc : viewcontext for image/display conversion
+ */
 void triangle::draw(GraphicsContext* GC, viewcontext* vc){
-
-	//std::cout << coor << std::endl;
-
+	//convert to display mode
 	matrix drawCoor = vc->convertToWindow(coor);
-
-	//cout << "file to screen" << endl;
-	//std::cout << drawCoor << std::endl;
-
-
 	int color = (((this->RED << 8) + this->GREEN) << 8) + this->BLUE;
 	GC->setColor(color);
-
-	//cout << drawCoor[0][0] << " " << drawCoor[1][0] << " to " << drawCoor[0][1] << " " << drawCoor[1][1] << endl;
 	GC->drawLine(drawCoor[0][0],  drawCoor[1][0],  drawCoor[0][1], drawCoor[1][1]);
-	//cout << drawCoor[0][1] << " " << drawCoor[1][1] << " to " << drawCoor[0][2] << " " << drawCoor[1][2] << endl;
 	GC->drawLine(drawCoor[0][1],  drawCoor[1][1],  drawCoor[0][2], drawCoor[1][2]);
-	//cout << drawCoor[0][2] << " " << drawCoor[1][2] << " to " << drawCoor[0][0] << " " << drawCoor[1][0] << endl;
 	GC->drawLine(drawCoor[0][2],  drawCoor[1][2],  drawCoor[0][0], drawCoor[1][0]);
 }
 

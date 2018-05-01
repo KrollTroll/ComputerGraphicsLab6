@@ -26,6 +26,19 @@ public:
 	 */
 	triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3);
 
+	/**
+	 * basic triangle constructor with added viewcontext for conversions
+	 * @param x  : origin x coordinate
+	 * @param y  : origin y coordinate
+	 * @param R  : RED value
+	 * @param G  : GREEN value
+	 * @param B  : BLUE value
+	 * @param x2 : second point x coordinate
+	 * @param y2 : second point y coordinate
+	 * @param x3 : third point x coordinate
+	 * @param y3 : third point y coordinate
+	 * @param vc : viewcontext for image/display conversions
+	 */
 	triangle(float x, float y, int R, int G, int B, float x2, float y2, float x3, float y3, viewcontext* vc);
 
 	/**
@@ -45,6 +58,11 @@ public:
 	 */
 	void draw(GraphicsContext* GC);
 
+	/**
+	 * draw method with added viewcontext for conversion
+	 * @param GC : graphicscontext interface to draw to
+	 * @param vc : viewcontext for image/display conversion
+	 */
 	void draw(GraphicsContext* GC, viewcontext* vc);
 
 	/**

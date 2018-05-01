@@ -100,13 +100,13 @@ void viewcontext::changeDeg(char sign){
 	}
 	//assign rotations values to homogenous matrix
 	dummy[0][0] =  cos(deg);
-	dummy[1][0] = -sin(deg);
-	dummy[0][1] =  sin(deg);
+	dummy[0][1] = -sin(deg);
+	dummy[1][0] =  sin(deg);
 	dummy[1][1] =  cos(deg);
 	//assign opposite rotation values to inverse homogenous matrix
 	dummyInv[0][0] =  cos(-deg);
-	dummyInv[1][0] = -sin(-deg);
-	dummyInv[0][1] =  sin(-deg);
+	dummyInv[0][1] = -sin(-deg);
+	dummyInv[1][0] =  sin(-deg);
 	dummyInv[1][1] =  cos(-deg);
 
 	//do forward  and invers operations on homogenous and inverse matrices

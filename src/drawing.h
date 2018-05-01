@@ -16,6 +16,9 @@ public:
  */
 drawing();
 
+/**
+ * destructor
+ */
 ~drawing();
 
 /**
@@ -94,14 +97,10 @@ image picture;
 unsigned int RED;
 unsigned int GREEN;
 unsigned int BLUE;
+unsigned int currentColor;
 
 viewcontext* vc;
-
-bool transforming;
 char tState;
 
-bool nowDrawing;
-
-bool nowModifying;
 };
 #endif

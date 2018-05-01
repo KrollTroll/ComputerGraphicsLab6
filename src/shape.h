@@ -49,6 +49,11 @@ public:
 	 */
 	virtual void draw(GraphicsContext* GC) = 0;
 
+	/**
+	 * modified shape drawing to account for viewcontext conversion
+	 * @param GC : target graphicscontext interface
+	 * @param vc : viewcontext object for conversion
+	 */
 	virtual void draw(GraphicsContext* GC, viewcontext* vc) = 0;
 
 	/**

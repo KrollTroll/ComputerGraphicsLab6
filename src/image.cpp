@@ -95,11 +95,17 @@ void image::draw(GraphicsContext* gc){
 	}
 }
 
+/**
+ * draw an image using a viewcontext to convert
+ * @param gc : graphicscontext interface
+ * @param vc : viewcontext for conversion
+ */
 void image::draw(GraphicsContext* gc, viewcontext* vc){
 	//draw each member of the vector
 	for(int i = 0; i < (int)shapes.size(); i++){
 		shapes[i]->draw(gc, vc);
 	}
+	gc->setColor(GraphicsContext::GREEN);
 }
 
 /**

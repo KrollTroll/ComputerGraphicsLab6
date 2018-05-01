@@ -25,14 +25,13 @@ drawing::drawing()
 	//decode default color value
 	decodeColor(GraphicsContext::GREEN);
 	vc = new viewcontext();
-	transforming = false;
 	tState = 'x';
-
-	nowDrawing = true;
-	nowModifying = false;
 	return;
 }
 
+/**
+ * destructor
+ */
 drawing::~drawing(){
 	delete vc;
 }
@@ -62,7 +61,7 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				dot = true;
 				seg = false;
 				tri = false;
-				tState = 'x';
+				//tState = 'x';
 				tVert = 0;
 			}
 			//l line
@@ -70,7 +69,7 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				dot = false;
 				seg = true;
 				tri = false;
-				tState = 'x';
+				//tState = 'x';
 				tVert = 0;
 			}
 			//t triangle
@@ -78,7 +77,7 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				dot = false;
 				seg = false;
 				tri = true;
-				tState = 'x';
+				//tState = 'x';
 				tVert = 0;
 			}
 			//hit 1 for red
@@ -141,6 +140,12 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				gc->clear();
 				vc->undo();
 				picture.draw(gc, vc);
+
+				dot = true;
+				seg = false;
+				tri = false;
+				tVert = 0;
+				tState = 'x';
 				gc->setColor(GraphicsContext::GREEN);
 				decodeColor(GraphicsContext::GREEN);
 			}
@@ -195,14 +200,14 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
 				}
 				//rotation state
 				else if(tState == 'r'){
-					//> pressed
-					if(keycode == 46){
+					//< pressed
+					if(keycode == 44){
 						vc->changeDeg('+');
 						gc->clear();
 						picture.draw(gc, vc);
 					}
-					//< pressed
-					else if(keycode == 44){
+					//> pressed
+					else if(keycode == 46){
 						vc->changeDeg('-');
 						gc->clear();
 						picture.draw(gc, vc);
@@ -236,7 +241,6 @@ void drawing::keyDown(GraphicsContext* gc, unsigned int keycode){
  */
 void drawing::mouseButtonDown(GraphicsContext* gc, unsigned int button, int x, int y)
 {
-	//if(tState == 'x'){
 		//if in line-drawing mode
 		if(seg){
 			// mouse button pushed down
@@ -316,7 +320,6 @@ void drawing::mouseButtonDown(GraphicsContext* gc, unsigned int button, int x, i
 			//std::cout << x << ", " << y << std::endl;
 			picture.add(&p1);
 		}
-	//}
 }
 
 /**

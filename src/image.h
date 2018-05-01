@@ -49,6 +49,11 @@ public:
 	 */
 	void draw(GraphicsContext* gc);
 
+	/**
+	 * draw an image using a viewcontext to convert
+	 * @param gc : graphicscontext interface
+	 * @param vc : viewcontext for conversion
+	 */
 	void draw(GraphicsContext* gc, viewcontext* vc);
 
 	/**
