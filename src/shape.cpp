@@ -11,7 +11,6 @@
 
 /**
  * Generic constructor
- * TODO: Error Checking?
  * @param ORG : origin point matrix
  * @param R   : RED data
  * @param G   : GREEN data

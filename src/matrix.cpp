@@ -138,7 +138,6 @@ matrix matrix::operator*(const matrix& rhs) const
 		throw matrixException("left matrix and right matrix not compatible!");
 	}
 	else{
-		//TODO: figure out an efficient algorithm
 		int rows_lhs = rows;
 		//int rows_rhs = rhs.rows;
 		int cols_lhs = cols;
